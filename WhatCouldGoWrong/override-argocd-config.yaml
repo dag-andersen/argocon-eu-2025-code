@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: innocent-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/org/repo.git
+    path: apps/innocent-app
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: argocd
+---
+# ArgoCD RBAC config at apps/innocent-app
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-config
+  namespace: argocd
+data:
+  policy.default: role:admin

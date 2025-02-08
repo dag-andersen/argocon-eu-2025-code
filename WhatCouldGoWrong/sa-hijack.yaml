@@ -1,0 +1,66 @@
+# innocent-app
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: innocent-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/org/repo.git
+    path: apps/innocent-app
+    targetRevision: HEAD
+  destination:
+    name: prod-cluster
+    namespace: database-proxy
+---
+# SA
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: database-proxy-sa
+  namespace: database-proxy
+---
+# Deployment at apps/innocent-app
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: innocent-app
+  namespace: database-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: innocent-app
+  template:
+    metadata:
+      labels:
+        app: innocent-app
+    spec:
+      serviceAccountName: database-proxy-sa
+      containers:
+      - name: innocent-app
+        image: innocent-app:latest
+        ports:
+        - containerPort: 8080
+---
+# Deployment at apps/database-proxy
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-proxy
+  namespace: database-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-proxy
+  template:
+    metadata:
+      labels:
+        app: database-proxy
+    spec:
+      serviceAccountName: database-proxy-sa
+      containers:
+      - name: database-proxy
+        image: database-proxy:latest

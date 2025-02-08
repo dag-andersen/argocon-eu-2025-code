@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: my-project
+  namespace: argocd
+spec:
+  destinations:
+  # Do not allow any app to be installed in `kube-system`  
+  - namespace: '!kube-system'
+    server: '*'
+  # Do not allow any app to be installed in `argocd`
+  - namespace: '!argocd'
+    server: '*'
+  # Do not allow any app to be installed in `argocd`
+  - namespace: '!database-proxy'
+    server: '*'
+  # Whitelist the rest
+  - namespace: '*'
+    server: '*'

@@ -1,0 +1,10 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: my-project
+  namespace: argocd
+spec:
+  namespaceResourceBlacklist:
+  - group: 'argoproj.io'
+    kind: Application
+---
