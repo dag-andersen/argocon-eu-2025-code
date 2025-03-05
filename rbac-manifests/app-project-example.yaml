@@ -14,7 +14,7 @@ spec:
     name: delete-pods   
     policies:
     - p, proj:team-a:delete-pods, applications, delete/*/Pod/*/*, team-a/app-1, allow
-    - p, proj:team-a:read-only, applications, get, team-a/*, allow
+    - p, proj:team-a:delete-pods, applications, get, team-a/*, allow
   destinations:
   - name: '*'
     namespace: '*'
