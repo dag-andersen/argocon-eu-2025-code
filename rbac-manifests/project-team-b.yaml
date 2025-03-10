@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: team-b
+  namespace: argocd
+spec:
+  roles:
+  - description: Read Only
+    name: read-only
+    policies:
+    - p, proj:team-b:read-only, logs, get, team-b/app-1, deny
+  - description: Delete Pods
+    name: delete-pods   
+    policies:
+    - p, proj:team-b:delete-pods, applications, delete/*/Pod/*/*, team-b/app-1, allow
+  destinations:
+  - name: '*'
+    namespace: '*'
+    server: '*'
+
