@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: innocent-app
+  namespace: argocd
+spec:
+  project: product-team
+  destination:
+    name: in-cluster
+    namespace: kube-system
+  source:
+    repoURL: "https://github.com/hacker-city/mainframe-destroyer.git"
+    path: app/getting-started
+    targetRevision: HEAD
