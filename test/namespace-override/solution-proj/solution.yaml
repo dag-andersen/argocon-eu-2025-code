@@ -10,7 +10,7 @@ spec:
   # Do not allow any app to be installed in `argocd`
   - namespace: '!argocd'
     server: '*'
-  # Do not allow any app to be installed in `argocd`
+  # Do not allow any app to be installed in X namespace
   - namespace: '!database-proxy'
     server: '*'
   # Whitelist the rest

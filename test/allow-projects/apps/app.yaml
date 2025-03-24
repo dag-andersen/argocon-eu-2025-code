@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: allow-projects
+  namespace: argocd
+spec:
+  project: product-team
+  source:
+    repoURL: https://github.com/dag-andersen/argocon-eu-2025-code.git
+    path: test/allow-projects/manifests
+    targetRevision: test-branch
+  destination:
+    name: in-cluster
+    namespace: argocd
