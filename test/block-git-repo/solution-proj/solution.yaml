@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: product-team
+spec:
+  sourceRepos:
+    # only allow apps from your org
+    - https://github.com/dag-andersen/*
+  # you need this part ⬇️
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
+---

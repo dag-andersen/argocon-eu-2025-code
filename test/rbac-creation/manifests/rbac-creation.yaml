@@ -13,8 +13,8 @@ metadata:
   name: allow-everything
 subjects:
   - kind: ServiceAccount
-    name: list-resources-sa  # Name of the ServiceAccount
-    namespace: default       # Namespace where the ServiceAccount is created
+    name: allow-everything
+    namespace: default
 roleRef:
   kind: ClusterRole
   name: allow-everything
@@ -36,4 +36,4 @@ spec:
   containers:
     - name: test-container
       image: hacker-city/hack-image
-      command: ["sh", "-c", "echo 'I am in!' && sleep 3600"]
+      command: ["kubectl", "get", "pods", "-A"]

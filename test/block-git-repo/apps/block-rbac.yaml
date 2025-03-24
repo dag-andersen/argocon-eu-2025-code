@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: block-rbac
+  name: block-git-repo
   namespace: argocd
 spec:
   project: product-team
   source:
     repoURL: https://github.com/dag-andersen/argocon-eu-2025-code.git
-    path: test-apps/rbac-creation
+    path: test/block-git-repo/manifests
     targetRevision: test-branch
   destination:
     name: in-cluster
