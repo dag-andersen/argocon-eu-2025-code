@@ -5,7 +5,7 @@ metadata:
 spec:
   sourceRepos:
     # only allow apps from your org
-    - https://github.com/dag-andersen/*
+    - https://github.com/dag-andersen/argocon-eu-2025-code.git
   # you need this part ⬇️
   clusterResourceWhitelist:
   - group: '*'
